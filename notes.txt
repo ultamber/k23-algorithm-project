@@ -1,0 +1,31 @@
+P pointset in D d-dimensional space
+dist(p_0 , q ) <= dist( p , q) ∀ p ∈ P 
+
+For fixed P ⊂ D, and approximation factor 1 > ϵ > 0, given a query point q, an
+ϵ-NN, or Approximate NN, of q is any point p0 ∈ P:
+dist(p0, q) ≤ (1 + ϵ) · dist(p, q), ∀p ∈ P
+
+Exact NN: practically O(n) or exp(d),
+while ANN is sublinear or logarithmic in n
+
+The family of ℓk norms, for vectors x, y ∈ R^d , defines various distances:
+dist ℓk (x,y) = ||x - y||_k = sqrt(k){ Σ (from i =1 to d ) | x_i - y_i| ^k} , k >=0
+
+
+Approximate kNN
+Input: query q
+Let b ←Null; db ← ∞; initialize k best candidates and distances;
+for i from 1 to L do
+    for each item p in bucket gi (q) do
+        if dist(q, p) < db = k-th best distance then 
+            b ← p; db ← dist(q, p)
+        end if
+        if large number of retrieved items (e.g. > 10L) then 
+            return b // optional
+        end if
+    end for
+    return b; k best candidates;
+end for
+
+For k > 1 must maintain k best candidate distances sorted so as to always
+replace k-th farthest candidate neighbor.
